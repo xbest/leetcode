@@ -1,5 +1,9 @@
 package com.gmail.imshhui.easy;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 /**
  * Given an array of integers, return indices of the two numbers such that they add up to a specific target.
  * <p>
@@ -14,17 +18,39 @@ package com.gmail.imshhui.easy;
  */
 public class TwoSum {
     public int[] twoSum(int[] nums, int target) {
-        int[] result = null;
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
                 if (nums[i] + nums[j] == target) {
-                    result = new int[2];
-                    result[0] = i;
-                    result[1] = j;
-                    break;
+                    return new int[]{i, j};
                 }
             }
         }
-        return result;
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
+    public int[] twoSumTwopassHashmap(int[] nums, int target) {
+        Map<Integer, Integer> numsMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            numsMap.put(nums[i], i);
+        }
+        for (int i = 0; i < nums.length; i++) {
+            Integer index = numsMap.get(target - nums[i]);
+            if (Objects.nonNull(index) && index != i) {
+                return new int[]{i, index};
+            }
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
+    public int[] twoSumOnepassHashmap(int[] nums, int target) {
+        Map<Integer, Integer> numsMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            numsMap.put(nums[i], i);
+            Integer index = numsMap.get(target - nums[i]);
+            if (Objects.nonNull(index) && index != i) {
+                return new int[]{index, i};
+            }
+        }
+        throw new IllegalArgumentException("No two sum solution");
     }
 }
