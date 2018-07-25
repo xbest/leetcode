@@ -48,6 +48,7 @@ public class AddTwoNumbers {
         if (Objects.isNull(l1) && Objects.isNull(l2) && carry > 0) {
             result.next = new ListNode(carry);
         }
+        // [2,3], [6,7,8]
         while (Objects.nonNull(l1)) {
             int sum = l1.val + carry;
             carry = sum / 10;
@@ -56,10 +57,12 @@ public class AddTwoNumbers {
                 result.next = l1;
                 break;
             }
+            // [2,3], [6,8,9]
             result.next = new ListNode(sum % 10);
             result = result.next;
             l1 = l1.next;
             if (Objects.isNull(l1)) {
+                // [1], [9,9,9]
                 result.next = new ListNode(carry);
             }
         }
