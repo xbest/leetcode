@@ -17,8 +17,8 @@ public class TwoSumTest {
 
     @Test
     public void twoSumOnepassHashmapTest() {
-        int[] nums = {2, 7, 11, 15};
-        int target = 9;
+        int[] nums = {3, 2, 3, 4};
+        int target = 6;
         int[] result = client.twoSumOnepassHashmap(nums, target);
         for (int i = 0; i < result.length; i++) {
             System.out.println(result[i]);
@@ -27,8 +27,8 @@ public class TwoSumTest {
 
     @Test
     public void twoSumTwopassHashmapTest() {
-        int[] nums = {2, 7, 11, 15};
-        int target = 9;
+        int[] nums = {3, 3};
+        int target = 6;
         int[] result = client.twoSumTwopassHashmap(nums, target);
         for (int i = 0; i < result.length; i++) {
             System.out.println(result[i]);

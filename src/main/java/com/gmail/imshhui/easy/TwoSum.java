@@ -45,11 +45,12 @@ public class TwoSum {
     public int[] twoSumOnepassHashmap(int[] nums, int target) {
         Map<Integer, Integer> numsMap = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            numsMap.put(nums[i], i);
+            // if the <code>numsMap.put(nums[i], i)</code> here and two num is the same value, then exception
             Integer index = numsMap.get(target - nums[i]);
             if (Objects.nonNull(index) && index != i) {
                 return new int[]{index, i};
             }
+            numsMap.put(nums[i], i);
         }
         throw new IllegalArgumentException("No two sum solution");
     }
