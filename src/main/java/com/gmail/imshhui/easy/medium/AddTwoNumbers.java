@@ -84,6 +84,28 @@ public class AddTwoNumbers {
         return head;
     }
 
+    public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        ListNode q = l1;
+        ListNode p = l2;
+        ListNode dummyHead = new ListNode(0);
+        ListNode currentNode = dummyHead;
+        int carry = 0;
+        while (Objects.nonNull(q) || Objects.nonNull(p)) {
+            int x = Objects.isNull(q) ? 0 : q.val;
+            int y = Objects.isNull(p) ? 0 : p.val;
+            int sum = x + y + carry;
+            carry = sum / 10;
+            currentNode.next = new ListNode(sum % 10);
+            currentNode = currentNode.next;
+            q = Objects.isNull(q) ? null : q.next;
+            p = Objects.isNull(p) ? null : p.next;
+        }
+        if (carry > 0) {
+            currentNode.next = new ListNode(carry);
+        }
+        return dummyHead.next;
+    }
+
     public class ListNode {
         int val;
         public ListNode next;
