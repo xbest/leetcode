@@ -27,11 +27,12 @@ public class TwoSumTest {
 
     @Test
     public void twoSumTwopassHashmapTest() {
-        int[] nums = {3, 3};
-        int target = 6;
-        int[] result = client.twoSumTwopassHashmap(nums, target);
-        for (int i = 0; i < result.length; i++) {
-            System.out.println(result[i]);
-        }
+//        int[] nums = {3, 3};
+//        int target = 6;
+//        int[] result = client.twoSumTwopassHashmap(nums, target);
+//        for (int i = 0; i < result.length; i++) {
+//            System.out.println(result[i]);
+//        }
+        System.out.println(11%10);
     }
 }
