@@ -1,7 +1,6 @@
 package com.gmail.imshhui.medium;
 
-import com.gmail.imshhui.easy.medium.AddTwoNumbers;
-import com.gmail.imshhui.easy.medium.AddTwoNumbers.ListNode;
+import com.gmail.imshhui.medium.AddTwoNumbers.ListNode;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.gmail.imshhui.easy.medium;
+package com.gmail.imshhui.medium;
 
 import java.util.Objects;
 
