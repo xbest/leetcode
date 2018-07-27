@@ -34,4 +34,26 @@ public class LongestSubstring {
         }
         return length;
     }
+
+    /**
+     * wrong case
+     * <li>"tmmzuxt"</li>
+     * <li>"abb"</li>
+     *
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring2(String s) {
+        char[] chars = s.toCharArray();
+        Map<Character, Integer> charsMap = new HashMap<>();
+        int length = 0, j = 0;
+        for (int i = 0; i < chars.length; i++) {
+            if (charsMap.containsKey(chars[i])) {
+                j = Math.max(charsMap.get(chars[i]) + 1, j);
+            }
+            length = Math.max(length, i - j + 1);
+            charsMap.put(chars[i], i);
+        }
+        return length;
+    }
 }
