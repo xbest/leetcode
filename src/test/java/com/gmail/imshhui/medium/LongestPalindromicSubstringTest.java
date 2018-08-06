@@ -14,5 +14,7 @@ public class LongestPalindromicSubstringTest {
     public void longestPalindromeTest() {
         Assert.assertEquals("bab", client.longestPalindrome("babad"));
         Assert.assertEquals("bb", client.longestPalindrome("cbbd"));
+        Assert.assertEquals("bab", client.longestPalindrome2("babad"));
+        Assert.assertEquals("bb", client.longestPalindrome2("cbbd"));
     }
 }
