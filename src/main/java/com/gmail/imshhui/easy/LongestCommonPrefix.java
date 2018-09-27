@@ -74,4 +74,59 @@ public class LongestCommonPrefix {
         }
         return prefix;
     }
+
+    /**
+     * vertical scanning
+     *
+     * @param strs
+     * @return
+     */
+    public String longestCommonPrefix2(String[] strs) {
+        if (Objects.isNull(strs) || strs.length == 0) {
+            return "";
+        }
+        for (int i = 0; i < strs[0].length(); i++) {
+            char c = strs[0].charAt(i);
+            for (int j = 1; j < strs.length; j++) {
+                if (i == strs[j].length() || strs[j].charAt(i) != c) {
+                    return strs[0].substring(0, i);
+                }
+            }
+        }
+        return strs[0];
+    }
+
+    /**
+     * divide and conquer
+     *
+     * @param strs
+     * @return
+     */
+    public String longestCommonPrefix3(String[] strs) {
+        if (Objects.isNull(strs) || strs.length == 0) {
+            return "";
+        }
+        return longestCommonPrefix(strs, 0, strs.length - 1);
+    }
+
+    private String longestCommonPrefix(String[] strs, int left, int right) {
+        if (left == right) {
+            return strs[left];
+        } else {
+            int mid = (left + right) / 2;
+            String leftStr = longestCommonPrefix(strs, left, mid);
+            String rightStr = longestCommonPrefix(strs, mid + 1, right);
+            return commonPrefix(leftStr, rightStr);
+        }
+    }
+
+    private String commonPrefix(String left, String right) {
+        int min = Math.min(left.length(), right.length());
+        for (int i = 0; i < min; i++) {
+            if (left.charAt(i) != right.charAt(i)) {
+                return left.substring(0, i);
+            }
+        }
+        return left.substring(0, min);
+    }
 }
