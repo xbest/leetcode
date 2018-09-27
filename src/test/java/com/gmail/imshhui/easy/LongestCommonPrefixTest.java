@@ -23,4 +23,18 @@ public class LongestCommonPrefixTest {
         String[] strs4 = {""};
         Assert.assertEquals("", client.longestCommonPrefix(strs4));
     }
+
+    @Test
+    public void longestCommonPrefix1Test() {
+        String[] strs = {"flower", "flow", "flight"};
+        Assert.assertEquals("fl", client.longestCommonPrefix1(strs));
+        String[] strs1 = {"dog","racecar","car"};
+        Assert.assertEquals("", client.longestCommonPrefix1(strs1));
+        String[] strs2 = {"dog"};
+        Assert.assertEquals("dog", client.longestCommonPrefix1(strs2));
+        String[] strs3 = null;
+        Assert.assertEquals("", client.longestCommonPrefix1(strs3));
+        String[] strs4 = {""};
+        Assert.assertEquals("", client.longestCommonPrefix1(strs4));
+    }
 }

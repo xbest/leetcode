@@ -24,6 +24,12 @@ import java.util.Objects;
  * Date: 2018/9/26
  */
 public class LongestCommonPrefix {
+    /**
+     * brute force
+     *
+     * @param strs
+     * @return
+     */
     public String longestCommonPrefix(String[] strs) {
         if (Objects.isNull(strs) || strs.length == 0) {
             return "";
@@ -48,5 +54,24 @@ public class LongestCommonPrefix {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * horizontal scanning
+     *
+     * @param strs
+     * @return
+     */
+    public String longestCommonPrefix1(String[] strs) {
+        if (Objects.isNull(strs) || strs.length == 0) {
+            return "";
+        }
+        String prefix = strs[0];
+        for (int i = 1; i < strs.length; i++) {
+            while (strs[i].indexOf(prefix) != 0) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+            }
+        }
+        return prefix;
     }
 }
