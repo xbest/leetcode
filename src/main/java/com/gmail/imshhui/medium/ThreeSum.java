@@ -29,21 +29,28 @@ public class ThreeSum {
             return result;
         }
         Arrays.sort(nums);
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                int temp = 0 - nums[i] - nums[j];
-                for (int k = j + 1; k < nums.length; k++) {
-                    if (temp == nums[k]) {
-                        List<Integer> sumList = new ArrayList<>();
-                        sumList.add(nums[i]);
-                        sumList.add(nums[j]);
-                        sumList.add(nums[k]);
-                        result.add(sumList);
+        for (int i = 0; i < nums.length - 2; i++) {
+            // skip the same numbers
+            if (i == 0 || nums[i] > nums[i - 1]) {
+                int start = i + 1;
+                int end = nums.length - 1;
+                while (start < end) {
+                    if (nums[i] + nums[start] + nums[end] == 0) {
+                        result.add(Arrays.asList(nums[i], nums[start], nums[end]));
+                    }
+                    if (nums[i] + nums[start] + nums[end] > 0) {
+                        int currentEnd = end;
+                        while (nums[currentEnd] == nums[end] && start < end) {
+                            end--;
+                        }
+                    } else {
+                        int currentStart = start;
+                        while (nums[currentStart] == nums[start] && start < end) {
+                            start++;
+                        }
                     }
                 }
             }
-            // avoid duplicate
-            while (i + 1 < nums.length && nums[i+1] == nums[i++]) ;
         }
         return result;
     }
