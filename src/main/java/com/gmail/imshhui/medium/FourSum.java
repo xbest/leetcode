@@ -26,13 +26,8 @@ import java.util.*;
  */
 public class FourSum {
     public List<List<Integer>> fourSum(int[] nums, int target) {
-        List<TwoSumItem> twoSumItemList = buildTwoSumItems(nums);
         Map<String, Integer> keyNumsMap = new HashMap<>();
-        for (int num : nums) {
-            String key = String.valueOf(num);
-            Integer keyNums = keyNumsMap.get(key);
-            keyNumsMap.put(key, keyNums == null ? 1 : keyNums + 1);
-        }
+        List<TwoSumItem> twoSumItemList = buildTwoSumItems(nums, keyNumsMap);
         Set<List<Integer>> set = new HashSet<>();
         for (int i = 0; i < twoSumItemList.size(); i++) {
             for (int j = i + 1; j < twoSumItemList.size(); j++) {
@@ -62,16 +57,20 @@ public class FourSum {
                 }
             }
         }
+
         return new ArrayList<>(set);
     }
 
-    public List<TwoSumItem> buildTwoSumItems(int[] nums) {
+    public List<TwoSumItem> buildTwoSumItems(int[] nums, Map<String, Integer> keyNumsMap) {
         List<TwoSumItem> twoSumItemList = new ArrayList<>();
         Arrays.sort(nums);
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
                 twoSumItemList.add(new TwoSumItem(nums[i], nums[j]));
             }
+            String key = String.valueOf(nums[i]);
+            Integer keyNums = keyNumsMap.get(key);
+            keyNumsMap.put(key, keyNums == null ? 1 : keyNums + 1);
         }
         Collections.sort(twoSumItemList);
         return twoSumItemList;
