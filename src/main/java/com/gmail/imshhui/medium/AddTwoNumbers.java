@@ -1,5 +1,7 @@
 package com.gmail.imshhui.medium;
 
+import com.gmail.imshhui.bean.ListNode;
+
 import java.util.Objects;
 
 /**
@@ -106,12 +108,4 @@ public class AddTwoNumbers {
         return dummyHead.next;
     }
 
-    public class ListNode {
-        int val;
-        public ListNode next;
-
-        public ListNode(int x) {
-            val = x;
-        }
-    }
 }

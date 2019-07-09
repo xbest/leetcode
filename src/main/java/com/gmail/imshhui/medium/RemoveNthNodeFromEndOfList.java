@@ -1,5 +1,7 @@
 package com.gmail.imshhui.medium;
 
+import com.gmail.imshhui.bean.ListNode;
+
 /**
  * Given a linked list, remove the n-th node from the end of list and return its head.
  * <p>
@@ -60,12 +62,4 @@ public class RemoveNthNodeFromEndOfList {
         return start.next;
     }
 
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
 }
