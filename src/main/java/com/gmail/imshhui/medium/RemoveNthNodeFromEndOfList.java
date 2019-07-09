@@ -44,6 +44,22 @@ public class RemoveNthNodeFromEndOfList {
         return currentHead;
     }
 
+    public ListNode removeNthFromEndOnePass(ListNode head, int n) {
+        ListNode start = new ListNode(0);
+        start.next = head;
+        ListNode fast = start;
+        ListNode slow = start;
+        for (int i = 0; i < n + 1; i++) {
+            fast = fast.next;
+        }
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        slow.next = slow.next.next;
+        return start.next;
+    }
+
     public class ListNode {
         int val;
         ListNode next;
