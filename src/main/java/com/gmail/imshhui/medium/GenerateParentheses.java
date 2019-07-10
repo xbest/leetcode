@@ -39,4 +39,25 @@ public class GenerateParentheses {
             backtrack(result, open, close - 1, temp + ")");
         }
     }
+
+    public List<String> generateParenthesis1(int n) {
+        List<String> result = new ArrayList<>();
+        backtrack1(result, n, n, new StringBuilder());
+        return result;
+    }
+
+    private void backtrack1(List<String> result, int open, int close, StringBuilder temp) {
+        if (open == 0 && close == 0) {
+            result.add(temp.toString());
+            return;
+        }
+        if (open > 0) {
+            backtrack1(result, open - 1, close, temp.append("("));
+            temp.setLength(temp.length() - 1);
+        }
+        if (close > open) {
+            backtrack1(result, open, close - 1, temp.append(")"));
+            temp.setLength(temp.length() - 1);
+        }
+    }
 }
