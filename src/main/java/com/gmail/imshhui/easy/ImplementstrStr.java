@@ -53,4 +53,23 @@ public class ImplementstrStr {
         }
         return index;
     }
+
+    public int strStr1(String haystack, String needle) {
+        // LeetCode does not support needle == "" actually
+        if (needle.isEmpty()) {
+            return 0;
+        }
+        // make sure that haystack.length() - needle.length() PLUS ONE to avoid case miss one element, such as case: "a", "a"
+        for (int i = 0; i < haystack.length() - needle.length() + 1; i++) {
+            // use i + j instead of temp
+            for (int j = 0; j < needle.length() && haystack.charAt(i + j) == needle.charAt(j); j++) {
+                // if j iterator the whole needle, then matched
+                if (j == needle.length() - 1) {
+                    return i;
+                }
+            }
+
+        }
+        return -1;
+    }
 }

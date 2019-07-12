@@ -12,8 +12,8 @@ public class ImplementstrStrTest {
 
     @Test
     public void strStrTest() {
-        Assert.assertEquals(0, client.strStr("", ""));
-        Assert.assertEquals(-1, client.strStr("aaa", "aaaa"));
-        Assert.assertEquals(4, client.strStr("mississippi", "issip"));
+        Assert.assertEquals(0, client.strStr1("", ""));
+        Assert.assertEquals(-1, client.strStr1("aaa", "aaaa"));
+        Assert.assertEquals(4, client.strStr1("mississippi", "issip"));
     }
 }
