@@ -18,6 +18,9 @@ package com.gmail.imshhui.medium;
  * Output: false
  * Explanation: You will always arrive at index 3 no matter what. Its maximum
  * jump length is 0, which makes it impossible to reach the last index.
+ * <p>
+ * <p>
+ * {@link com.gmail.imshhui.easy.MaximumSubarray#maxSubArrayOn(int[])}
  *
  * @see <a href="https://leetcode.com/problems/jump-game/"></a>
  * User: liyulin
@@ -39,5 +42,15 @@ public class JumpGame {
             }
         }
         return false;
+    }
+
+    public boolean canJumpOn(int[] nums) {
+        int last = nums.length - 1;
+        for (int i = nums.length - 2; i >= 0; i--) {
+            if (i + nums[i] > last) {
+                last = i;
+            }
+        }
+        return last <= 0;
     }
 }

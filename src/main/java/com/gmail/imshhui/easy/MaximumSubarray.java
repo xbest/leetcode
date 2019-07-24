@@ -11,6 +11,7 @@ package com.gmail.imshhui.easy;
  * Follow up:
  * <p>
  * If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
+ * {@link com.gmail.imshhui.medium.JumpGame#canJumpOn(int[])}
  *
  * @see <a href="https://leetcode.com/problems/maximum-subarray/"></a>
  * User: liyulin
