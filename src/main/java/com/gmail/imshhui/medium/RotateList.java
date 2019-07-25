@@ -29,7 +29,7 @@ import com.gmail.imshhui.bean.ListNode;
 public class RotateList {
     public ListNode rotateRight(ListNode head, int k) {
         if (head == null) {
-            return head;
+            return null;
         }
         ListNode tail = head;
         int length = 1;
@@ -37,12 +37,8 @@ public class RotateList {
             length++;
             tail = tail.next;
         }
-        if (length == k) {
-            return head;
-        }
         int step = length - k % length;
         ListNode cur = head;
-        ListNode ret;
         while (step > 1) {
             cur = cur.next;
             step--;
