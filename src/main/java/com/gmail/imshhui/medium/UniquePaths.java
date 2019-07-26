@@ -1,5 +1,8 @@
 package com.gmail.imshhui.medium;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
  * <p>
@@ -51,4 +54,36 @@ public class UniquePaths {
             backtrace(way, i, j + 1, m, n);
         }
     }
+
+    public int uniquePaths1(int m, int n) {
+        Map<String, Integer> visited = new HashMap<>();
+        return backtrace1(visited, 0, 0, m, n);
+    }
+
+    private int backtrace1(Map<String, Integer> visited, int i, int j, int m, int n) {
+        if (i == m - 1 && j == n - 1) {
+            return 1;
+        }
+        String key;
+        int n1 = 0, n2 = 0;
+        if (i <= m - 1) {
+            key = (i + 1) + "@" + j;
+            if (visited.containsKey(key)) {
+                n1 = visited.get(key);
+            } else {
+                n1 = backtrace1(visited, i + 1, j, m, n);
+            }
+        }
+        if (j <= n - 1) {
+            key = i + "@" + (j + 1);
+            if (visited.containsKey(key)) {
+                n2 = visited.get(key);
+            } else {
+                n2 = backtrace1(visited, i, j + 1, m, n);
+            }
+        }
+        visited.put(i + "@" + j, n1 + n2);
+        return n1 + n2;
+    }
+
 }
