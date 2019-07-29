@@ -44,4 +44,26 @@ public class ClimbingStairs {
         return n1 + n2;
     }
 
+    public int climbStairs1(int n) {
+        int[] visited = new int[n + 1];
+        return backtrace1(n, visited);
+    }
+
+    private int backtrace1(int remain, int[] visited) {
+        if (remain < 0) {
+            return 0;
+        }
+        if (remain == 0) {
+            return 1;
+        }
+        if (visited[remain] > 0) {
+            return visited[remain];
+        }
+        int n1 = backtrace1(remain - 1, visited);
+        int n2 = backtrace1(remain - 2, visited);
+        int n = n1 + n2;
+        visited[remain] = n;
+        return n;
+    }
+
 }
