@@ -52,4 +52,30 @@ public class SortColors {
             }
         }
     }
+
+    public void sortColors1(int[] nums) {
+        int length = nums.length;
+        if (length < 2) {
+            return;
+        }
+        int left = 0, current = 0, right = length - 1;
+        while (current <= right) {
+            if (nums[current] == 0) {
+                swap(nums, left, current);
+                current++;
+                left++;
+            } else if (nums[current] == 1) {
+                current++;
+            } else {
+                swap(nums, right, current);
+                right--;
+            }
+        }
+    }
+
+    private void swap(int[] nums, int a, int b) {
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
+    }
 }
