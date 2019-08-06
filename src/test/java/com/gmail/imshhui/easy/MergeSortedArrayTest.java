@@ -11,8 +11,8 @@ public class MergeSortedArrayTest {
 
     @Test
     public void mergeSortedArray() {
-        int[] nums1 = {2, 0};
-        int[] nums2 = {1};
-        client.merge(nums1, 1, nums2, 1);
+        int[] nums1 = {1,2,4,5,6,0};
+        int[] nums2 = {3};
+        client.merge1(nums1, 5, nums2, 1);
     }
 }

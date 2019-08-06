@@ -28,4 +28,24 @@ public class MergeSortedArray {
         }
         Arrays.sort(nums1, 0, m + n);
     }
+
+    public void merge1(int[] nums1, int m, int[] nums2, int n) {
+        for (int i = m + n - 1, j = m - 1; i >= 0 && j >= 0; i--, j--) {
+            nums1[i] = nums1[j];
+        }
+        int i = 0, j = 0, k = n;
+        for (; i < m + n && k < m + n && j < n; i++) {
+            if (nums1[k] > nums2[j]) {
+                nums1[i] = nums2[j++];
+            } else {
+                nums1[i] = nums1[k++];
+            }
+        }
+        while (k < m + n) {
+            nums1[i++] = nums1[k++];
+        }
+        while (j < n) {
+            nums1[i++] = nums2[j++];
+        }
+    }
 }
