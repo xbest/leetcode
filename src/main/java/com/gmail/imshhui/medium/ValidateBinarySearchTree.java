@@ -2,6 +2,8 @@ package com.gmail.imshhui.medium;
 
 import com.gmail.imshhui.bean.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -74,5 +76,27 @@ public class ValidateBinarySearchTree {
             root = root.right;
         }
         return max;
+    }
+
+    public boolean isValidBST1(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> inorderList = new ArrayList<>();
+        while (root != null || stack.size() > 0) {
+
+            if (root != null) {
+                stack.push(root);
+                root = root.left;
+            } else {
+                root = stack.pop();
+                inorderList.add(root.val);
+                root = root.right;
+            }
+        }
+        for (int i = 0; i < inorderList.size() - 1; i++) {
+            if (inorderList.get(i) >= inorderList.get(i + 1)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
