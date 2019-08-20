@@ -4,7 +4,6 @@ import com.gmail.imshhui.bean.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
@@ -29,7 +28,6 @@ import java.util.Stack;
  */
 public class BinaryTreeLevelOrderTraversal {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<>();
         List<List<Integer>> ret = new ArrayList<>();
         levelHelper(ret, root, 0);
         return ret;
