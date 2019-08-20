@@ -34,6 +34,7 @@ public class ConvertSortedArrayToBinarySearchTree {
         }
         // make sure plus one here
         int mid = start + (end - start + 1) / 2;
+        // int mid = start + (end - start) / 2; will be ok too...
         TreeNode root = new TreeNode(nums[mid]);
         root.left = treeHelper(nums, start, mid - 1);
         root.right = treeHelper(nums, mid + 1, end);
