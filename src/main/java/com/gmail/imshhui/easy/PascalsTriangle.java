@@ -1,6 +1,7 @@
 package com.gmail.imshhui.easy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -50,5 +51,21 @@ public class PascalsTriangle {
             temp.add(pre.get(i) + pre.get(i + 1));
         }
         list.add(temp);
+    }
+
+    private void triangleHelper1(List<List<Integer>> list, int numRows) {
+        if (numRows == 0) {
+            list.add(Arrays.asList(1));
+        } else if (numRows > 0) {
+            triangleHelper(list, numRows - 1);
+            List<Integer> pre = new ArrayList<>(list.get(numRows - 1));
+            pre.add(0, 0);
+            pre.add(pre.size(), 0);
+            List<Integer> temp = new ArrayList<>(pre.size() - 1);
+            for (int i = 0; i < pre.size() - 1; i++) {
+                temp.add(pre.get(i) + pre.get(i + 1));
+            }
+            list.add(temp);
+        }
     }
 }
