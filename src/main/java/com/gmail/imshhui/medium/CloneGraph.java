@@ -1,9 +1,8 @@
 package com.gmail.imshhui.medium;
 
-import com.gmail.imshhui.model.Node;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,5 +46,18 @@ public class CloneGraph {
         map.put(node.val, tempNode);
         node.neighbors.forEach(neighbor -> tempNode.neighbors.add(clone(neighbor, map)));
         return tempNode;
+    }
+
+    private class Node {
+        public int val;
+        public List<Node> neighbors;
+
+        public Node() {
+        }
+
+        public Node(int _val, List<Node> _neighbors) {
+            val = _val;
+            neighbors = _neighbors;
+        }
     }
 }
