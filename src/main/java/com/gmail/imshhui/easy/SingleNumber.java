@@ -32,4 +32,12 @@ public class SingleNumber {
         }
         return nums[nums.length - 1];
     }
+
+    public int singleNumberXOR(int[] nums) {
+        int result = 0;
+        for (int i = 0; i < nums.length; i++) {
+            result = result ^ nums[i];
+        }
+        return result;
+    }
 }
