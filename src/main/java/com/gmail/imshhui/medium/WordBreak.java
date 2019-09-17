@@ -53,7 +53,6 @@ public class WordBreak {
                     set.add(pos);
                 }
             }
-            set.add(pos);
         }
     }
 }
