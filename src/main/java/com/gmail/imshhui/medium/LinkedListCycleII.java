@@ -72,7 +72,6 @@ public class LinkedListCycleII {
         return true && isHead;
     }
 
-
     public ListNode detectCycle2(ListNode head) {
         if (head == null || head.next == null) {
             return null;
@@ -92,5 +91,26 @@ public class LinkedListCycleII {
             }
         }
         return null;
+    }
+
+    public ListNode detectCycle3(ListNode head) {
+        if (head == null || head.next == null) {
+            return null;
+        }
+        ListNode slow = head.next;
+        ListNode fast = head.next.next;
+        while (slow != fast) {
+            if (fast == null || fast.next == null) {
+                return null;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode first = head;
+        while (first != slow) {
+            first = first.next;
+            slow = slow.next;
+        }
+        return first;
     }
 }
