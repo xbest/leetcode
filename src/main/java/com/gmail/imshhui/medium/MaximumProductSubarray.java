@@ -33,4 +33,20 @@ public class MaximumProductSubarray {
         return max;
     }
 
+    public int maxProduct1(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int global = nums[0];
+        int max = nums[0];
+        int min = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            int temp = max;
+            max = Math.max(max * nums[i], Math.max(nums[i], min * nums[i]));
+            min = Math.min(min * nums[i], Math.min(nums[i], temp * nums[i]));
+            global = Math.max(global, max);
+        }
+        return global;
+    }
+
 }
