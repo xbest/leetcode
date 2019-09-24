@@ -35,12 +35,27 @@ public class RotateArray {
         // repeated k times
         while (k > 0) {
             // move one step
-            int movedInt = nums[nums.length - 1];
+            int temp = nums[nums.length - 1];
             for (int i = nums.length - 1; i >= 0; i--) {
                 nums[i] = nums[i - 1];
             }
-            nums[0] = movedInt;
+            nums[0] = temp;
             k--;
+        }
+    }
+
+    public void rotate2(int[] nums, int k) {
+        if (nums == null || nums.length <= 1) {
+            return;
+        }
+        int[] a = new int[nums.length];
+        // move k distance in one step
+        for (int i = 0; i < nums.length; i++) {
+            a[(i + k) % nums.length] = nums[i];
+        }
+
+        for (int i = 0; i < a.length; i++) {
+            nums[i] = a[i];
         }
     }
 }
