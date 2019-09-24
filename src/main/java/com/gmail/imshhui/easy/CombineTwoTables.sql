@@ -35,7 +35,7 @@ Write a SQL query for a report that provides the following information for each 
 
 FirstName, LastName, City, State
 
-*************** Problem Description ***************/
+ *************** Problem Description ***************/
 
 /*************** Problem Solution ***************/
 select FirstName, LastName, City, State from Person p left join Address a on p.PersonId = a.PersonId;

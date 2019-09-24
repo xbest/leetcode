@@ -22,7 +22,7 @@ For example, given the above Employee table, the query should return 200 as the 
 +---------------------+
 | 200                 |
 +---------------------+
-*************** Problem Description ***************/
+ *************** Problem Description ***************/
 
 /*************** Problem Solution ***************/
 select max(Salary) as SecondHighestSalary from Employee where Salary < (select max(Salary)from Employee);
