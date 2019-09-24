@@ -4,6 +4,7 @@ import com.gmail.imshhui.bean.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
@@ -58,10 +59,40 @@ public class BSTIterator {
     public boolean hasNext() {
         return !list.isEmpty();
     }
+
     /**
      * Your BSTIterator object will be instantiated and called as such:
      * BSTIterator obj = new BSTIterator(root);
      * int param_1 = obj.next();
      * boolean param_2 = obj.hasNext();
      */
+    class BinarySearchTreeIterator {
+        private Stack<TreeNode> stack;
+
+        public BinarySearchTreeIterator(TreeNode root) {
+            stack = new Stack<>();
+            leftMostInorder(root);
+        }
+
+        private void leftMostInorder(TreeNode root) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+        }
+
+        /** @return the next smallest number */
+        public int next() {
+            TreeNode node = stack.pop();
+            if (node.right != null) {
+                leftMostInorder(node.right);
+            }
+            return node.val;
+        }
+
+        /** @return whether we have a next smallest number */
+        public boolean hasNext() {
+            return !stack.isEmpty();
+        }
+    }
 }
