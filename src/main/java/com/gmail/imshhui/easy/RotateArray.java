@@ -58,4 +58,24 @@ public class RotateArray {
             nums[i] = a[i];
         }
     }
+
+    public void rotate3(int[] nums, int k) {
+        if (nums == null || nums.length <= 1) {
+            return;
+        }
+        k = k % nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+    }
+
+    public void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[end];
+            nums[end] = nums[start];
+            nums[start] = temp;
+            start++;
+            end--;
+        }
+    }
 }
