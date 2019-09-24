@@ -66,6 +66,6 @@ Max and Jim both have the highest salary in the IT department and Henry has the 
 
 /*************** Problem Solution ***************/
 select Department.Name as Department, Employee.Name as Employee, Salary
-from Employee left join Department on DepartmentId = Department.Id
+from Employee join Department on DepartmentId = Department.Id
 where (DepartmentId, Salary) in (select DepartmentId, max(Salary) from Employee group by DepartmentId);
 /*************** Problem Solution ***************/
