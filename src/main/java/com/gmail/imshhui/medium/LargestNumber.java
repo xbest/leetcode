@@ -1,6 +1,7 @@
 package com.gmail.imshhui.medium;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -35,6 +36,22 @@ public class LargestNumber {
         list.forEach(s -> sb.append(s));
         if (sb.length() > 0 && sb.charAt(0) == '0') {
             return "0";
+        }
+        return sb.toString();
+    }
+
+    public String largestNumber1(int[] nums) {
+        String[] strings = new String[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            strings[i] = String.valueOf(nums[i]);
+        }
+        Arrays.sort(strings, (s1, s2) -> (s2 + s1).compareTo(s1 + s2));
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < strings.length; i++) {
+            if ("0".equals(strings[0])) {
+                return "0";
+            }
+            sb.append(strings[i]);
         }
         return sb.toString();
     }
