@@ -53,4 +53,16 @@ public class HouseRobber {
         memo[i] = result;
         return result;
     }
+
+    public int robIterative(int[] nums) {
+        int rob = 0;
+        int notRob = 0;
+        int curRob;
+        for (int i = 0; i < nums.length; i++) {
+            curRob = notRob + nums[i];
+            notRob = Math.max(rob, notRob);
+            rob = curRob;
+        }
+        return Math.max(rob, notRob);
+    }
 }
