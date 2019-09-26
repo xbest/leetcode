@@ -49,8 +49,7 @@ public class HappyNumber {
 //        }
         while (n > 0) {
             int remainder;
-            // 可以用位运算&代替取模%，a%b=a&(b-1)
-            // remainder = n&9;
+            // 可以用位运算&代替取模%，a%b=a&(b-1)，如果b是2^n，b是2的N次方，此处不行
             remainder = n % 10;
             sum = sum + remainder * remainder;
             n = n / 10;
