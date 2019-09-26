@@ -42,10 +42,16 @@ public class HappyNumber {
 
     private int digitsSquare(int n) {
         int sum = 0;
-        String s = String.valueOf(n);
-        for (int i = 0; i < s.length(); i++) {
-            int x = s.charAt(i) - 48;
-            sum = sum + x * x;
+//        String s = String.valueOf(n);
+//        for (int i = 0; i < s.length(); i++) {
+//            int x = s.charAt(i) - 48;
+//            sum = sum + x * x;
+//        }
+        while (n > 0) {
+            int remainder = 0;
+            remainder = n % 10;
+            sum = sum + remainder * remainder;
+            n = n / 10;
         }
         return sum;
     }
