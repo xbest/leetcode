@@ -48,7 +48,9 @@ public class HappyNumber {
 //            sum = sum + x * x;
 //        }
         while (n > 0) {
-            int remainder = 0;
+            int remainder;
+            // 可以用位运算&代替取模%，a%b=a&(b-1)
+            // remainder = n&9;
             remainder = n % 10;
             sum = sum + remainder * remainder;
             n = n / 10;
