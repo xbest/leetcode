@@ -1,8 +1,6 @@
 package com.gmail.imshhui.medium;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -33,4 +31,22 @@ public class RepeatedDNASequences {
         }
         return map.keySet().stream().filter(x -> map.get(x) > 1).collect(Collectors.toList());
     }
+
+    public List<String> findRepeatedDnaSequencesBitwise(String s) {
+        Set<Integer> all = new HashSet<>();
+        Set<String> repeated = new HashSet<>();
+        int sum = 0;
+        for (int i = 0; i < s.length(); i++) {
+            sum = ((sum << 3) | (s.charAt(i) & 7)) & 0x3FFFFFFF;
+            if (i < 9) {
+                continue;
+            }
+            if (all.contains(sum)) {
+                repeated.add(s.substring(i - 9, i + 1));
+            }
+            all.add(sum);
+        }
+        return new ArrayList<>(repeated);
+    }
+
 }
