@@ -1,5 +1,6 @@
 package com.gmail.imshhui.easy;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +47,24 @@ public class IsomorphicStrings {
                 }
                 map.put(s.charAt(i), t.charAt(i));
             }
+        }
+        return true;
+    }
+
+    public boolean isIsomorphic1(String s, String t) {
+        if (s == null || t == null || s.length() != t.length()) {
+            return false;
+        }
+        int[] sInt = new int[256];
+        int[] tInt = new int[256];
+        Arrays.fill(sInt, -1);
+        Arrays.fill(tInt, -1);
+        for (int i = 0; i < s.length(); i++) {
+            if (sInt[s.charAt(i)] != tInt[t.charAt(i)]) {
+                return false;
+            }
+            sInt[s.charAt(i)] = i;
+            tInt[t.charAt(i)] = i;
         }
         return true;
     }
