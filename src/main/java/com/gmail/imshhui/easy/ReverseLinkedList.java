@@ -35,4 +35,31 @@ public class ReverseLinkedList {
         }
         return dummyNode.next;
     }
+
+    /**
+     * another iterative solution
+     * @param head
+     * @return
+     */
+    public ListNode reverseListIterative(ListNode head) {
+        ListNode pre = null;
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
+        }
+        return pre;
+    }
+
+    public ListNode reverseListRecursive(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode p = reverseListRecursive(head.next);
+        head.next.next = head;
+        head.next = null;
+        return p;
+    }
+
 }
