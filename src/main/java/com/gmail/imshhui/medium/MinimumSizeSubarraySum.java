@@ -32,4 +32,18 @@ public class MinimumSizeSubarraySum {
         }
         return count == Integer.MAX_VALUE ? 0 : count;
     }
+
+    public int minSubArrayLenOf2Pointers(int s, int[] nums) {
+        int ans = Integer.MAX_VALUE;
+        int left = 0;
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum = sum + nums[i];
+            while (sum >= s) {
+                ans = Math.min(ans, i + 1 - left);
+                sum = sum - nums[left++];
+            }
+        }
+        return ans == Integer.MAX_VALUE ? 0 : ans;
+    }
 }
