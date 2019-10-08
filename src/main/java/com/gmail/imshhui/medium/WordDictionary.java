@@ -38,11 +38,7 @@ public class WordDictionary {
 
     /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
     public boolean search(String word) {
-        boolean ans = false;
-        if (word.contains(".")) {
-            // TODO
-        }
-        return false;
+        return trie.search(word);
     }
 
     private class TrieNode {
@@ -73,6 +69,10 @@ public class WordDictionary {
         public void setEnd() {
             isEnd = true;
         }
+
+        public TrieNode[] getLinks() {
+            return links;
+        }
     }
 
     private class Trie {
@@ -86,12 +86,10 @@ public class WordDictionary {
             TrieNode node = root;
             for (int i = 0; i < word.length(); i++) {
                 char c = word.charAt(i);
-                while (node != null) {
-                    if (!node.containsKey(c)) {
-                        node.put(c, new TrieNode());
-                    }
-                    node = node.get(c);
+                if (!node.containsKey(c)) {
+                    node.put(c, new TrieNode());
                 }
+                node = node.get(c);
             }
             node.setEnd();
         }
@@ -109,9 +107,25 @@ public class WordDictionary {
             return node;
         }
 
+        public boolean match(char[] chars, int k, TrieNode node) {
+            if (k == chars.length) {
+                return node.isEnd();
+            }
+            if (chars[k] == '.') {
+                TrieNode[] trieNodes = node.getLinks();
+                for (int i = 0; i < trieNodes.length; i++) {
+                    if (trieNodes[i] != null && match(chars, k + 1, trieNodes[i])) {
+                        return true;
+                    }
+                }
+            } else {
+                return node.containsKey(chars[k]) && match(chars, k + 1, node.get(chars[k]));
+            }
+            return false;
+        }
+
         public boolean search(String word) {
-            TrieNode node = searchPrefix(word);
-            return node != null && node.isEnd();
+            return match(word.toCharArray(), 0, root);
         }
     }
 }
