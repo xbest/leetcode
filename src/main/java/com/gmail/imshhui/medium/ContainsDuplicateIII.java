@@ -26,12 +26,11 @@ import java.util.Map;
  */
 public class ContainsDuplicateIII {
     public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
-        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 1; i <= k; i++) {
             for (int j = 0; j < nums.length - i; j++) {
                 // bad case: the max integer
                 // [-1,2147483647], 1, 2147483647
-                // [-2147483647,2147483647], 1, 2147483647
+                // [-214748364`7,2147483647], 1, 2147483647
                 long temp = (long) nums[j] - (long) nums[j + i];
                 if (Math.abs(temp) <= t) {
                     return true;
@@ -39,5 +38,34 @@ public class ContainsDuplicateIII {
             }
         }
         return false;
+    }
+
+    public boolean containsNearbyAlmostDuplicateBucket(int[] nums, int k, int t) {
+        if (t < 0) {
+            return false;
+        }
+        Map<Long, Long> bucket = new HashMap<>();
+        long width = t + 1;
+        for (int i = 0; i < nums.length; i++) {
+            long num = nums[i];
+            long id = bucketId(num, width);
+            if (bucket.containsKey(id)) {
+                return true;
+            }
+            if (bucket.containsKey(id + 1) && Math.abs(bucket.get(id + 1) - num) < width
+                    || bucket.containsKey(id - 1) && Math.abs(bucket.get(id - 1) - num) < width) {
+                return true;
+            }
+            bucket.put(id, num);
+            if (i >= k) {
+                bucket.remove(bucketId(nums[i - k], width));
+            }
+        }
+
+        return false;
+    }
+
+    private long bucketId(long x, long w) {
+        return x < 0 ? x + 1 / w - 1 : x / w;
     }
 }
