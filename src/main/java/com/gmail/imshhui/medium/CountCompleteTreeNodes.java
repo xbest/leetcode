@@ -53,4 +53,10 @@ public class CountCompleteTreeNodes {
         levelHelper(root.left, map, high + 1);
         levelHelper(root.right, map, high + 1);
     }
+
+    public int countNodes1(TreeNode root) {
+        if (root == null)
+            return 0;
+        return 1 + countNodes1(root.left) + countNodes1(root.right);
+    }
 }
