@@ -51,6 +51,19 @@ public class MyStack {
         }
     }
 
+    /**
+     * one queue solution for MyStack
+     * @param x
+     */
+    public void push1(int x) {
+        stack.add(x);
+        int size = stack.size();
+        while (size > 1) {
+            stack.add(stack.poll());
+            size--;
+        }
+    }
+
     /** Removes the element on top of the stack and returns that element. */
     public int pop() {
         return stack.poll();
