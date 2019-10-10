@@ -57,4 +57,24 @@ public class SummaryRanges {
         }
         return res;
     }
+
+    public List<String> summaryRangesEasy(int[] nums) {
+        List<String> res = new ArrayList<>();
+        if (nums == null || nums.length == 0) {
+            return res;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            int temp = nums[i];
+            while (i + 1 < nums.length && Math.abs(nums[i + 1] - nums[i]) == 1) {
+                i++;
+            }
+            if (nums[i] == temp) {
+                res.add(temp + "");
+            } else {
+                res.add(temp + "->" + nums[i]);
+            }
+        }
+        return res;
+    }
 }
