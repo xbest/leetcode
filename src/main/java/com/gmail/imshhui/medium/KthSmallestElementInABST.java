@@ -4,6 +4,7 @@ import com.gmail.imshhui.bean.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.
@@ -53,5 +54,20 @@ public class KthSmallestElementInABST {
         inOrder(root.left, list);
         list.add(root.val);
         inOrder(root.right, list);
+    }
+
+    public int kthSmallestIterative(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+        while (true) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if (--k == 0) {
+                return root.val;
+            }
+            root = root.right;
+        }
     }
 }
