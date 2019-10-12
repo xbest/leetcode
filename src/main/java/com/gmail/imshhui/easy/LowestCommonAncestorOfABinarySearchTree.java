@@ -44,4 +44,16 @@ public class LowestCommonAncestorOfABinarySearchTree {
             return root;
         }
     }
+
+    public TreeNode lowestCommonAncestorIterative(TreeNode root, TreeNode p, TreeNode q) {
+        while (true) {
+            if (p.val > root.val && q.val > root.val) {
+                root = root.right;
+            } else if (p.val < root.val && q.val < root.val) {
+                root = root.left;
+            } else {
+                return root;
+            }
+        }
+    }
 }
