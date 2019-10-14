@@ -34,4 +34,13 @@ public class MissingNumber {
         }
         return nums[nums.length - 1] + 1;
     }
+
+    public int missingNumberBit(int[] nums) {
+        int missingNum = nums.length;
+        for (int i = 0; i < nums.length; i++) {
+            missingNum = missingNum ^ i ^ nums[i];
+        }
+        return missingNum;
+    }
+
 }
