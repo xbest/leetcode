@@ -43,4 +43,13 @@ public class MissingNumber {
         return missingNum;
     }
 
+    public int missingNumberGauss(int[] nums) {
+        int expectedSum = nums.length * (nums.length + 1) / 2;
+        int actualSum = 0;
+        for (int num : nums) {
+            actualSum = actualSum + num;
+        }
+        return expectedSum - actualSum;
+    }
+
 }
