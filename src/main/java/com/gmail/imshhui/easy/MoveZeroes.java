@@ -36,4 +36,16 @@ public class MoveZeroes {
         nums[i] = nums[j];
         nums[j] = temp;
     }
+
+    public void moveZeroes1(int[] nums) {
+        int lastNonZeroIndex = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[lastNonZeroIndex++] = nums[i];
+            }
+        }
+        for (int i = lastNonZeroIndex; i < nums.length; i++) {
+            nums[i] = 0;
+        }
+    }
 }
