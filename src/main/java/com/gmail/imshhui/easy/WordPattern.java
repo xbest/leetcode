@@ -33,22 +33,40 @@ import java.util.Map;
  * Date: 2019/10/15
  */
 public class WordPattern {
-    public boolean wordPattern(String pattern, String str) {
+    public boolean wordPattern1(String pattern, String str) {
         Map<Character, String> map = new HashMap<>();
-        String[] strings = str.split(" ");
-        if (pattern.length() != strings.length) {
+        String[] words = str.split(" ");
+        if (pattern.length() != words.length) {
             return false;
         }
         for (int i = 0; i < pattern.length(); i++) {
             char c = pattern.charAt(i);
             if (map.containsKey(c)) {
-                if (!map.get(c).equals(strings[i])) {
+                if (!map.get(c).equals(words[i])) {
                     return false;
                 }
-            } else if (map.containsValue(strings[i])) {
+            } else if (map.containsValue(words[i])) {
                 return false;
             }
-            map.put(c, strings[i]);
+            map.put(c, words[i]);
+        }
+        return true;
+    }
+
+    public boolean wordPattern(String pattern, String str) {
+        Map map = new HashMap<>();
+        String[] words = str.split(" ");
+        if (pattern.length() != words.length) {
+            return false;
+        }
+        // bad case: if int i = 0 instead of Integer i = 0 in the iterative for
+        // because of autoboxing, @see <code>Integer.valueOf()</code>
+        //"ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccdd"
+        //"s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s t t"
+        for (Integer i = 0; i < pattern.length(); i++) {
+            if (map.put(pattern.charAt(i), i) != map.put(words[i], i)) {
+                return false;
+            }
         }
         return true;
     }
