@@ -43,30 +43,25 @@ package com.gmail.imshhui.medium;
  * Date: 2019/10/15
  */
 public class GameOfLife {
-    public void gameOfLifeBruteForce(int[][] board) {
+    public void gameOfLife(int[][] board) {
         if (board == null || board.length == 0) {
             return;
         }
-        int[][] boardNext = new int[board.length][board[0].length];
-        copyArrays(board, boardNext);
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
-                cellState(board, boardNext, i, j);
+                cellState(board, i, j);
             }
         }
-        copyArrays(boardNext, board);
-    }
 
-    private void copyArrays(int[][] src, int[][] dest) {
-        for (int i = 0; i < src.length; i++) {
-            for (int j = 0; j < src[0].length; j++) {
-                dest[i][j] = src[i][j];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                board[i][j] = board[i][j] % 2;
             }
         }
     }
 
-    private void cellState(int[][] board, int[][] boardNext, int i, int j) {
+    private void cellState(int[][] board, int i, int j) {
         int liveCells = 0;
         liveCells += calCell(board, i - 1, j - 1);
         liveCells += calCell(board, i, j - 1);
@@ -78,25 +73,41 @@ public class GameOfLife {
         liveCells += calCell(board, i - 1, j);
 
         if (board[i][j] == 0 && liveCells == 3) {
-            boardNext[i][j] = 1;
+            board[i][j] = 3;
         }
         if (board[i][j] == 1) {
             if (liveCells < 2) {
-                boardNext[i][j] = 0;
+                board[i][j] = 2;
             }
             if (liveCells == 2 || liveCells == 3) {
-                boardNext[i][j] = 1;
+                board[i][j] = 1;
             }
             if (liveCells > 3) {
-                boardNext[i][j] = 0;
+                board[i][j] = 2;
             }
         }
     }
 
     private int calCell(int[][] board, int i, int j) {
+        int state = 0;
         if (i >= 0 && i < board.length && j >= 0 && j < board[0].length) {
-            return board[i][j];
+            switch (board[i][j]) {
+                case 0:
+                    state = 0;
+                    break;
+                case 1:
+                    state = 1;
+                    break;
+                case 2:
+                    state = 1;
+                    break;
+                case 3:
+                    state = 0;
+                    break;
+                default:
+                    break;
+            }
         }
-        return 0;
+        return state;
     }
 }
