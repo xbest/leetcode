@@ -37,4 +37,28 @@ public class LongestIncreasingSubsequence {
         int notTaken = lengthOfLIS(nums, pre, pos + 1);
         return Math.max(taken, notTaken);
     }
+
+
+    public int lengthOfLISDP(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        if (nums.length == 1) {
+            return 1;
+        }
+        int[] dp = new int[nums.length];
+        dp[0] = 1;
+        int max = 0;
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                // bad case: [2,2] while max=1 not max=2
+                if (nums[j] < nums[i]) {
+                    dp[i] = Math.max(dp[i], dp[j]);
+                }
+            }
+            dp[i] = dp[i] + 1;
+            max = Math.max(max, dp[i]);
+        }
+        return max;
+    }
 }
