@@ -32,6 +32,7 @@ public class NumArray {
         nums[i] = val;
     }
 
+    // TODO segment tree solution with O(lgN)
     public int sumRange(int i, int j) {
         int sum = 0;
         for (int k = i; k <= j; k++) {
