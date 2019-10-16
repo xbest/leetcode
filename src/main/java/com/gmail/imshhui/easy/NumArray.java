@@ -18,18 +18,20 @@ package com.gmail.imshhui.easy;
  * Date: 2019/10/16
  */
 public class NumArray {
-    private int[] nums;
+    private int[] sums;
 
     public NumArray(int[] nums) {
-        this.nums = nums;
+        if (nums != null && nums.length > 0) {
+            sums = new int[nums.length];
+            sums[0] = nums[0];
+            for (int i = 1; i < nums.length; i++) {
+                sums[i] = nums[i] + sums[i - 1];
+            }
+        }
     }
 
     public int sumRange(int i, int j) {
-        int sum = 0;
-        for (int start = i; start <= j; start++) {
-            sum = sum + nums[start];
-        }
-        return sum;
+        return i == 0 ? sums[j] : sums[j] - sums[i - 1];
     }
 }
 
