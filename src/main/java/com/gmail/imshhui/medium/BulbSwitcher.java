@@ -24,24 +24,16 @@ package com.gmail.imshhui.medium;
  * Date: 2019/10/21
  */
 public class BulbSwitcher {
-    public int bulbSwitchTimeLimitExceeded(int n) {
+    public int bulbSwitch(int n) {
         if (n == 0 || n == 1) {
             return n;
         }
-        // false means on
-        boolean[] bulbs = new boolean[n + 1];
-        for (int i = 2; i < n; i++) {
-            for (int j = i; j < bulbs.length; j = j + i) {
-                bulbs[j] = !bulbs[j];
-            }
-        }
-        bulbs[n] = !bulbs[n];
         int count = 0;
-        for (int i = 1; i < bulbs.length; i++) {
-            if (!bulbs[i]) {
-                count++;
-            }
-        }
+        // false means on
+
         return count;
+    }
+    public int bulbSwitchTimeLimitExceeded(int n) {
+        return (int)Math.sqrt(n);
     }
 }
