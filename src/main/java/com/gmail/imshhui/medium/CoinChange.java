@@ -19,12 +19,27 @@ import java.util.Arrays;
  Note:
  You may assume that you have an infinite number of each kind of coin.
 
- @see <a href="https://leetcode.com/problems/coin-change/"></a>
+ @see <a href="https://leetcode.com/problems/coin-change/">322. Coin Change</a>
   *
   * User: liyulin
   * Date: 2019/10/21
  */
 public class CoinChange {
+    public int coinChange(int[] coins, int amount) {
+        int max = amount + 1;
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, max);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+                }
+            }
+        }
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+
     public int coinChangeTimeLimitExceeded(int[] coins, int amount) {
         Arrays.sort(coins);
         int[] min = new int[]{Integer.MAX_VALUE};
