@@ -56,7 +56,7 @@ public class Twitter {
 
     /** Compose a new tweet. */
     public void postTweet(int userId, int tweetId) {
-        tweets.addFirst(new Tweet(userId, tweetId));
+        tweets.add(new Tweet(userId, tweetId));
     }
 
     /** Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent. */
@@ -64,7 +64,7 @@ public class Twitter {
         Set<Integer> userIds = follows.getOrDefault(userId, new HashSet<>());
         userIds.add(userId);
         List<Integer> res = new ArrayList<>();
-        for (int i = 0; i < tweets.size() && res.size() < 10; i++) {
+        for (int i = tweets.size() - 1; i >= 0 && res.size() < 10; i--) {
             if (userIds.contains(tweets.get(i).userId)) {
                 res.add(tweets.get(i).tweetId);
             }
