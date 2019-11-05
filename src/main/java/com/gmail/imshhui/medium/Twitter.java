@@ -1,6 +1,7 @@
 package com.gmail.imshhui.medium;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Design a simplified version of Twitter where users can post tweets,
@@ -45,18 +46,22 @@ import java.util.*;
  * Date: 2019/11/4
  */
 public class Twitter {
-    private LinkedList<Tweet> tweets;
+    private AtomicInteger timeStamp;
+    private Map<Integer, List<Tweet>> tweets;
     private Map<Integer, Set<Integer>> follows;
 
     /** Initialize your data structure here. */
     public Twitter() {
-        tweets = new LinkedList<>();
+        timeStamp = new AtomicInteger();
+        tweets = new HashMap<>();
         follows = new HashMap<>();
     }
 
     /** Compose a new tweet. */
     public void postTweet(int userId, int tweetId) {
-        tweets.add(new Tweet(userId, tweetId));
+        List<Tweet> list = tweets.getOrDefault(userId, new ArrayList<>());
+        list.add(new Tweet(userId, tweetId, timeStamp.incrementAndGet()));
+        tweets.put(userId, list);
     }
 
     /** Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent. */
@@ -64,10 +69,13 @@ public class Twitter {
         Set<Integer> userIds = follows.getOrDefault(userId, new HashSet<>());
         userIds.add(userId);
         List<Integer> res = new ArrayList<>();
-        for (int i = tweets.size() - 1; i >= 0 && res.size() < 10; i--) {
-            if (userIds.contains(tweets.get(i).userId)) {
-                res.add(tweets.get(i).tweetId);
-            }
+        PriorityQueue<Tweet> queue = new PriorityQueue<>((a, b) -> (b.timeStamp - a.timeStamp));
+        for (Integer id : userIds) {
+            List<Tweet> userTweets = tweets.getOrDefault(id, new ArrayList<>());
+            userTweets.forEach(tweet -> queue.add(tweet));
+        }
+        while (res.size() < 10 && !queue.isEmpty()) {
+            res.add(queue.poll().tweetId);
         }
         return res;
     }
@@ -87,12 +95,14 @@ public class Twitter {
     }
 
     private class Tweet {
+        private int timeStamp;
         private int userId;
         private int tweetId;
 
-        public Tweet(int userId, int tweetId) {
+        public Tweet(int userId, int tweetId, int timeStamp) {
             this.userId = userId;
             this.tweetId = tweetId;
+            this.timeStamp = timeStamp;
         }
     }
 }
