@@ -37,13 +37,13 @@ public class SumOfLeftLeaves {
     }
 
     public int sumOfLeftLeaves1(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
         return treeHelper(root, false);
     }
 
     private int treeHelper(TreeNode root, boolean isLeft) {
+        if (root == null) {
+            return 0;
+        }
         if (root.left == null && root.right == null && isLeft) {
             return root.val;
         }
