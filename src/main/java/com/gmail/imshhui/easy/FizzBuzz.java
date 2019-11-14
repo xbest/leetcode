@@ -52,4 +52,28 @@ public class FizzBuzz {
         }
         return res;
     }
+
+    public List<String> fizzBuzz1(int n) {
+        List<String> res = new ArrayList<>();
+        int fizz = 0;
+        int buzz = 0;
+        for (int i = 1; i <= n; i++) {
+            fizz++;
+            buzz++;
+            if (fizz == 3 && buzz == 5) {
+                res.add("FizzBuzz");
+                fizz = 0;
+                buzz = 0;
+            } else if (fizz == 3) {
+                res.add("Fizz");
+                fizz = 0;
+            } else if (buzz == 5) {
+                res.add("Buzz");
+                buzz = 0;
+            } else {
+                res.add(Integer.toString(i));
+            }
+        }
+        return res;
+    }
 }
