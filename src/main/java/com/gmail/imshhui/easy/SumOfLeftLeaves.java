@@ -35,4 +35,18 @@ public class SumOfLeftLeaves {
         res = res + sumOfLeftLeaves(root.right);
         return res;
     }
+
+    public int sumOfLeftLeaves1(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return treeHelper(root, false);
+    }
+
+    private int treeHelper(TreeNode root, boolean isLeft) {
+        if (root.left == null && root.right == null && isLeft) {
+            return root.val;
+        }
+        return treeHelper(root.left, true) + treeHelper(root.right, false);
+    }
 }
