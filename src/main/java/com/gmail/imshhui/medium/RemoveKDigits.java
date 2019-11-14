@@ -1,7 +1,6 @@
 package com.gmail.imshhui.medium;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Stack;
 
 /**
  * Given a non-negative integer num represented as a string,
@@ -31,33 +30,35 @@ import java.util.Set;
  * Date: 2019/11/14
  */
 public class RemoveKDigits {
-    private int min = Integer.MAX_VALUE;
-
     public String removeKdigits(String num, int k) {
         // corner case
         if (num.length() == k) {
             return "0";
         }
-        removeHelper(num, k, 0, new HashSet<>());
-        return Integer.toString(min);
-    }
-
-    private void removeHelper(String num, int k, int pos, Set<Integer> idxs) {
-        if (k == 0) {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < num.length(); i++) {
-                if (idxs.contains(i)) {
-                    continue;
-                }
-                sb.append(num.charAt(i));
+        Stack<Character> stack = new Stack<>();
+        int i = 0;
+        while (i < num.length()) {
+            char c = num.charAt(i);
+            while (k > 0 && !stack.isEmpty() && c < stack.peek()) {
+                stack.pop();
+                k--;
             }
-            min = Math.min(min, Integer.valueOf(sb.toString()));
-            return;
+            stack.push(c);
+            i++;
         }
-        for (int i = pos; i < num.length(); i++) {
-            idxs.add(i);
-            removeHelper(num, k - 1, i + 1, idxs);
-            idxs.remove(i);
+        // corner case: 11111
+        while (k > 0) {
+            stack.pop();
+            k--;
         }
+        StringBuilder sb = new StringBuilder();
+        while (!stack.isEmpty()) {
+            sb.append(stack.pop());
+        }
+        sb.reverse();
+        while (sb.length() > 1 && sb.charAt(0) == '0') {
+            sb.deleteCharAt(0);
+        }
+        return sb.toString();
     }
 }
