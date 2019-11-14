@@ -1,7 +1,5 @@
 package com.gmail.imshhui.medium;
 
-import java.util.Stack;
-
 /**
  * Given a non-negative integer num represented as a string,
  * remove k digits from the number so that the new number is the smallest possible.
@@ -35,30 +33,22 @@ public class RemoveKDigits {
         if (num.length() == k) {
             return "0";
         }
-        Stack<Character> stack = new Stack<>();
-        int i = 0;
-        while (i < num.length()) {
-            char c = num.charAt(i);
-            while (k > 0 && !stack.isEmpty() && c < stack.peek()) {
-                stack.pop();
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < num.length(); i++) {
+            char cur = num.charAt(i);
+            while (k > 0 && res.length() > 0 && res.charAt(res.length() - 1) > cur) {
+                res.deleteCharAt(res.length() - 1);
                 k--;
             }
-            stack.push(c);
-            i++;
+            if (res.length() == 0 && cur == '0') {
+                continue;
+            }
+            res.append(cur);
         }
-        // corner case: 11111
-        while (k > 0) {
-            stack.pop();
-            k--;
+        // corner case: 1111
+        while (k > 0 && res.length() > 0) {
+            res.deleteCharAt(res.length() - 1);
         }
-        StringBuilder sb = new StringBuilder();
-        while (!stack.isEmpty()) {
-            sb.append(stack.pop());
-        }
-        sb.reverse();
-        while (sb.length() > 1 && sb.charAt(0) == '0') {
-            sb.deleteCharAt(0);
-        }
-        return sb.toString();
+        return res.toString();
     }
 }
