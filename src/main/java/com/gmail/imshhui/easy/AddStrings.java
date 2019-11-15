@@ -16,29 +16,15 @@ package com.gmail.imshhui.easy;
  */
 public class AddStrings {
     public String addStrings(String num1, String num2) {
-        if (num1.length() < num2.length()) {
-            int difference = num2.length() - num1.length();
-            for (int i = 0; i < difference; i++) {
-                num1 = "0" + num1;
-            }
-        } else if (num1.length() > num2.length()) {
-            int difference = num1.length() - num2.length();
-            for (int i = 0; i < difference; i++) {
-                num2 = "0" + num2;
-            }
-        }
-
         StringBuilder sb = new StringBuilder();
         int carry = 0;
-        for (int i = num1.length() - 1; i >= 0; i--) {
-            int a = num1.charAt(i) - '0';
-            int b = num2.charAt(i) - '0';
+        // bad case: 0,0 corner case: 9,9 with carry==1
+        for (int i = num1.length() - 1, j = num2.length() - 1; i >= 0 || j >= 0 || carry == 1; i--, j--) {
+            int a = i < 0 ? 0 : num1.charAt(i) - '0';
+            int b = j < 0 ? 0 : num2.charAt(j) - '0';
             int sum = a + b + carry;
             carry = sum / 10;
             sb.append(sum % 10);
-        }
-        if (carry == 1) {
-            sb.append(carry);
         }
         return sb.reverse().toString();
     }
