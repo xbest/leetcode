@@ -1,5 +1,9 @@
 package com.gmail.imshhui.easy;
 
+import java.util.HashSet;
+import java.util.PriorityQueue;
+import java.util.Set;
+
 /**
  * Given a non-empty array of integers, return the third maximum number in this array.
  * If it does not exist, return the maximum number. The time complexity must be in O(n).
@@ -43,5 +47,22 @@ public class ThirdMaximumNumber {
             }
         }
         return max3 == Long.MIN_VALUE ? (int) max1 : (int) max3;
+    }
+
+    public int thirdMaxMinHeap(int[] nums) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            if (set.add(num)) {
+                minHeap.offer(num);
+                if (minHeap.size() > 3) {
+                    minHeap.poll();
+                }
+            }
+        }
+        if (minHeap.size() == 2) {
+            minHeap.poll();
+        }
+        return minHeap.peek();
     }
 }
