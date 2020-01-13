@@ -1,5 +1,7 @@
 package com.gmail.imshhui.medium;
 
+import java.util.Stack;
+
 /**
  * Given a sequence of n integers a1, a2, ..., an, a 132 pattern is a subsequence ai, aj, ak such that i < j < k and ai < ak < aj.
  * Design an algorithm that takes a list of n numbers as input and checks whether there is a 132 pattern in the list.
@@ -27,16 +29,16 @@ package com.gmail.imshhui.medium;
  */
 public class A132Pattern {
     public boolean find132pattern(int[] nums) {
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                for (int k = j + 1; k < nums.length; k++) {
-//                    bad case: [1, 0, 1, -4, -3]
-//                    if (nums[i] < nums[j] && nums[j] > nums[k]) {
-                    if (nums[i] < nums[k] && nums[k] < nums[j]) {
-                        return true;
-                    }
-                }
+        int last = Integer.MIN_VALUE;
+        Stack<Integer> stack = new Stack<>();
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (nums[i] < last) {
+                return true;
             }
+            while (!stack.isEmpty() && stack.peek() < nums[i]) {
+                last = stack.pop();
+            }
+            stack.push(nums[i]);
         }
         return false;
     }
