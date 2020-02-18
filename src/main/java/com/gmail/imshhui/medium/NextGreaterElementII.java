@@ -1,6 +1,7 @@
 package com.gmail.imshhui.medium;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 /**
  * Given a circular array (the next element of the last element is the first element of the array),
@@ -35,6 +36,21 @@ public class NextGreaterElementII {
                 }
                 j = (j + 1) % nums.length;
             }
+        }
+        return res;
+    }
+
+    public int[] nextGreaterElementsStack(int[] nums) {
+        int[] res = new int[nums.length];
+        Arrays.fill(res, -1);
+        Stack<Integer> stack = new Stack<>();
+        stack.push(0);
+        for (int i = 1; i < nums.length * 2; i++) {
+            int j = i%nums.length;
+            while (!stack.isEmpty() && nums[stack.peek()] < nums[j]) {
+                res[stack.pop()] = nums[j];
+            }
+            stack.push(j);
         }
         return res;
     }
