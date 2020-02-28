@@ -36,8 +36,10 @@ public class ArrayNesting {
         for (int i = 0; i < nums.length; i++) {
             int idx = nums[i];
             int length = 1;
-            while (idx != i) {
+            while (idx != i && idx >= 0) {
+                int temp = idx;
                 idx = nums[idx];
+                nums[temp] = -1; // marked nums[idx] as visited
                 length++;
             }
             max = Math.max(max, length);
