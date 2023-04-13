@@ -4,6 +4,7 @@ import com.gmail.imshhui.bean.ListNode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * 1019. 链表中的下一个更大节点
@@ -63,5 +64,37 @@ public class NextLargerNodes {
         }
 
         return res.stream().mapToInt(Integer::valueOf).toArray();
+    }
+
+    public int[] nextLargerNodes2(ListNode head) {
+
+        List<Integer> nodes = new ArrayList<>();
+        while (head != null) {
+            nodes.add(head.val);
+            head = head.next;
+        }
+        Stack<int[]> stack = new Stack<>();
+        int[] res = new int[nodes.size()];
+
+        for (int j = 0; j < nodes.size(); j++) {
+            while (!stack.isEmpty() && stack.peek()[0] < nodes.get(j)) {
+                res[stack.pop()[1]] = nodes.get(j);
+            }
+            stack.push(new int[] {nodes.get(j), j});
+        }
+
+        return res;
+    }
+
+    public static void main(String[] args) {
+        NextLargerNodes nextLargerNodes = new NextLargerNodes();
+        ListNode head = new ListNode(1);
+        ListNode n1 = new ListNode(7);
+        ListNode n2 = new ListNode(5);
+        ListNode n3 = new ListNode(8);
+        head.next = n1;
+        n1.next = n2;
+        n2.next = n3;
+        nextLargerNodes.nextLargerNodes2(head);
     }
 }
