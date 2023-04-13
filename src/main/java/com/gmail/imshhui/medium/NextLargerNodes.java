@@ -40,4 +40,28 @@ public class NextLargerNodes {
         }
         return res;
     }
+
+    public int[] nextLargerNodes1(ListNode head) {
+        ListNode outside = head;
+        List<Integer> res = new ArrayList<>();
+        while (outside != null) {
+            int val = outside.val;
+            ListNode inside = outside;
+            boolean found = false;
+            while (inside != null) {
+                if (val < inside.val) {
+                    res.add(inside.val);
+                    found = true;
+                    break;
+                }
+                inside = inside.next;
+            }
+            if (!found) {
+                res.add(0);
+            }
+            outside = outside.next;
+        }
+
+        return res.stream().mapToInt(Integer::valueOf).toArray();
+    }
 }
