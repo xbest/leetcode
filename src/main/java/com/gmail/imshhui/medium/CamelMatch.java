@@ -47,6 +47,30 @@ public class CamelMatch {
 
     }
 
+    public List<Boolean> camelMatch1(String[] queries, String pattern) {
+        List<Boolean> res = new ArrayList<>();
+
+        for (String query : queries) {
+            res.add(matched(query, pattern));
+        }
+        return res;
+
+    }
+
+    private boolean matched(String query, String pattern) {
+        int j = 0;
+        for (int i = 0; i < query.length(); i++) {
+            if (j < pattern.length() && query.charAt(i) == pattern.charAt(j)) {
+                j++;
+            } else {
+                if (Character.isUpperCase(query.charAt(i))) {
+                    return false;
+                }
+            }
+        }
+        return j == pattern.length();
+    }
+
     public static void main(String[] args) {
         CamelMatch camelMatch = new CamelMatch();
         String[] queries = new String[] {"FooBar", "FooBarTest", "FootBall", "FrameBuffer", "ForceFeedBack"};
