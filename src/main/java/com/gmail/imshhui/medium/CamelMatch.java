@@ -62,10 +62,8 @@ public class CamelMatch {
         for (int i = 0; i < query.length(); i++) {
             if (j < pattern.length() && query.charAt(i) == pattern.charAt(j)) {
                 j++;
-            } else {
-                if (Character.isUpperCase(query.charAt(i))) {
-                    return false;
-                }
+            } else if (Character.isUpperCase(query.charAt(i))) {
+                return false;
             }
         }
         return j == pattern.length();
