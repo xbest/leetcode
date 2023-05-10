@@ -18,7 +18,19 @@ package com.gmail.imshhui.medium;
  */
 public class SmallestRepunitDivByK {
     public int smallestRepunitDivByK(int k) {
+        if (k % 2 == 0 || k % 5 == 0) {
+            return -1;
+        }
+        int i = 1;
+        for (int n = 1; n % k != 0; i++) {
+            n %= k;
+            n = n * 10 + 1;
+        }
+        return i;
+    }
 
-        return -1;
+    public static void main(String[] args) {
+        SmallestRepunitDivByK smallestRepunitDivByK = new SmallestRepunitDivByK();
+        System.out.println(smallestRepunitDivByK.smallestRepunitDivByK(17));
     }
 }
